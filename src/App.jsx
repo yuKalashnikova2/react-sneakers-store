@@ -6,6 +6,8 @@ import sneakers2 from './assets/sneakerses/sneakers-2.png'
 import sneakers3 from './assets/sneakerses/sneakers-3.png'
 import sneakers4 from './assets/sneakerses/sneakers-4.png'
 import plus from './assets/plus.svg'
+import search from './assets/search.svg'
+import unliked from './assets/heart-unlike.svg'
 
 export function App() {
   return (
@@ -30,9 +32,22 @@ export function App() {
       </header>
 
       <div className="content p-40">
-        <h1 className="mb-40">Все кроссовки</h1>
+
+        <div className='d-flex align-center justify-between mb-40'>
+        <h1>Все кроссовки</h1>
+        <div className='searchBlock d-flex'>
+            <img width={14} height={14} src={search} alt='search' />
+            <input placeholder='Поиск...'/>
+        </div>
+        </div>
+       
+
         <div className="d-flex">
           <div className="card mr-30">
+            <div class='favorite'>
+            <img src={unliked} alt='unliked'/>
+            </div>
+            
             <img width={133} height={112} src={sneakers1} />
             <h5>Мужские Кроссовки Nike Blazer Mid Suede</h5>
             <div className="d-flex justify-between align-center">
