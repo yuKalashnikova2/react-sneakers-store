@@ -1,20 +1,19 @@
-import sneakers1 from '../assets/sneakerses/sneakers-1.png'
-import plus from '../assets/plus.svg'
-import unliked from '../assets/heart-unlike.svg'
+import plus from '../public/plus.svg'
+import unliked from '../public/heart-unlike.svg'
 
-const ProductCard = () => {
+const ProductCard = (props) => {
   return (
     <div className="card mr-30">
       <div class="favorite">
         <img src={unliked} alt="unliked" />
       </div>
 
-      <img width={133} height={112} src={sneakers1} />
-      <h5>Мужские Кроссовки Nike Blazer Mid Suede</h5>
+      <img width={133} height={112} src={props.img} />
+      <h5>{props.name}</h5>
       <div className="d-flex justify-between align-center">
         <div className="d-flex flex-column">
           <span>Цена:</span>
-          <b>12 999 руб.</b>
+          <b>{props.price} руб.</b>
         </div>
 
         <button>

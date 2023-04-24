@@ -1,6 +1,6 @@
-import remove from '../assets/cartRemove.svg'
+import remove from '../public/cartRemove.svg'
 import CartItem from './CartItem'
-import arrow from '../assets/arrow.svg'
+import arrow from '../public/arrow.svg'
 
 const Cart = () => {
   return (

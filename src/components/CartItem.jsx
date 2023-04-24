@@ -1,5 +1,5 @@
-import sneakers1 from '../assets/sneakerses/sneakers-1.png'
-import remove from '../assets/cartRemove.svg'
+import sneakers1 from '../public/sneakerses/sneakers-1.png'
+import remove from '../public/cartRemove.svg'
 const CartItem = () => {
   return (
     <div className="cartItem mb-20 d-flex align-center">
