@@ -2,13 +2,13 @@ import remove from '../public/cartRemove.svg'
 import CartItem from './CartItem'
 import arrow from '../public/arrow.svg'
 
-const Cart = () => {
+const Cart = (props) => {
   return (
     <div className="overlay">
       <div className="drawer d-flex flex-column">
         <h2 className="mb-30 d-flex justify-between">
           Корзина
-          <img className="btnRemove" width={32} height={32} src={remove} />
+          <img className="btnRemove" width={32} height={32} src={remove}  onClick={props.onClocedCart}/>
         </h2>
         <div className="items">
           <CartItem />

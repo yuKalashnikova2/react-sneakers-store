@@ -1,3 +1,5 @@
+import { useState } from 'react'
+
 import search from './public/search.svg'
 import Cart from './components/Cart'
 import ProductCard from './components/ProductCard'
@@ -62,11 +64,13 @@ const arr = [
   },
 ]
 export function App() {
+  const [cartOpened, setCartOpened] = useState(false)
+
   return (
     <div className="wrapper clear">
-      <Cart />
+      {cartOpened && <Cart onClocedCart={() => setCartOpened(false)} />}
 
-      <Header />
+      <Header onClickCart={() => setCartOpened(true)} />
       <div className="content p-40">
         <div className="d-flex align-center justify-between mb-40">
           <h1>Все кроссовки</h1>
