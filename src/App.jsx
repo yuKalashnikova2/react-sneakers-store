@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import search from './public/search.svg'
 import Cart from './components/Cart'
@@ -15,56 +15,20 @@ import sneakers8 from './public/sneakerses/sneakers-8.png'
 import sneakers9 from './public/sneakerses/sneakers-9.png'
 import sneakers10 from './public/sneakerses/sneakers-10.png'
 
-const arr = [
-  {
-    name: 'Мужские Кроссовки Nike Blazer Mid Suede',
-    price: 12990,
-    imgUrl: sneakers1,
-  },
-  {
-    name: 'Мужские Кроссовки Nike Air Max 270',
-    price: 12990,
-    imgUrl: sneakers2,
-  },
-  {
-    name: 'Кроссовки Puma X Aka Boku Future Rider',
-    price: 8499,
-    imgUrl: sneakers3,
-  },
-  {
-    name: 'Мужские Кроссовки Under Armour Curry 8',
-    price: 15199,
-    imgUrl: sneakers4,
-  },
-  { name: 'Мужские Кроссовки Nike Kyrie 7', price: 11299, imgUrl: sneakers5 },
-  {
-    name: 'Мужские Кроссовки Jordan Air Jordan 11',
-    price: 10799,
-    imgUrl: sneakers6,
-  },
-  {
-    name: 'Мужские Кроссовки Nike LeBron XVIII',
-    price: 16499,
-    imgUrl: sneakers7,
-  },
-  {
-    name: 'Мужские Кроссовки Nike Lebron XVIII Low',
-    price: 13999,
-    imgUrl: sneakers8,
-  },
-  {
-    name: 'Мужские Кроссовки Nike Blazer Mid Suede',
-    price: 8499,
-    imgUrl: sneakers9,
-  },
-  {
-    name: 'Мужские Кроссовки Nike Kyrie Flytrap IV',
-    price: 11299,
-    imgUrl: sneakers10,
-  },
-]
 export function App() {
+  console.log('render')
+  const [listSneakers, setListSneakers] = useState([])
   const [cartOpened, setCartOpened] = useState(false)
+
+  useEffect(() => {
+    fetch('http://localhost:3000/sneakers')
+      .then((res) => {
+        return res.json()
+      })
+      .then((json) => {
+        setListSneakers(json)
+      })
+  }, [])
 
   return (
     <div className="wrapper clear">
@@ -81,7 +45,7 @@ export function App() {
         </div>
 
         <div className="d-flex wrap">
-          {arr.map((obj) => (
+          {listSneakers.map((obj) => (
             <ProductCard name={obj.name} price={obj.price} img={obj.imgUrl} />
           ))}
         </div>

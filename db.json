@@ -1,0 +1,54 @@
+{
+  "sneakers": [
+    {
+      "name": "Мужские Кроссовки Nike Blazer Mid Suede",
+      "price": "12990",
+      "imgUrl": "https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5/b93f8703-cb87-49b3-b1f0-68485d94a1ea/%E0%B8%A3%E0%B8%AD%E0%B8%87%E0%B9%80%E0%B8%97%E0%B9%89%E0%B8%B2%E0%B8%9C%E0%B8%B9%E0%B9%89-spark-zPVQHZ.png"
+    },
+    {
+      "name": "Мужские Кроссовки Nike Air Max 270",
+      "price": "12990",
+      "imgUrl": "https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5/b13c23ff-1fd7-4411-9a1e-599b3e26bb3e/%E0%B8%A3%E0%B8%AD%E0%B8%87%E0%B9%80%E0%B8%97%E0%B9%89%E0%B8%B2%E0%B8%9C%E0%B8%B9%E0%B9%89-spark-zPVQHZ.png"
+    },
+    {
+      "name": "Кроссовки Puma X Aka Boku Future Rider",
+      "price": "8499",
+      "imgUrl": "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_1750,h_1750/global/383348/01/sv01/fnd/THA/fmt/png/%E0%B8%A3%E0%B8%AD%E0%B8%87%E0%B9%80%E0%B8%97%E0%B9%89%E0%B8%B2%E0%B8%81%E0%B8%B5%E0%B8%AC%E0%B8%B2-Cruise-Rider-HC"
+    },
+    {
+      "name": "Мужские Кроссовки Under Armour Curry 8",
+      "price": "15199",
+      "imgUrl": "https://static.nike.com/a/images/t_PDP_864_v1/f_auto,b_rgb:f5f5f5/ca113e5f-2165-476a-8dcf-ce7a0d85356c/%E0%B8%A3%E0%B8%AD%E0%B8%87%E0%B9%80%E0%B8%97%E0%B9%89%E0%B8%B2%E0%B8%9C%E0%B8%B9%E0%B9%89-air-jordan-1-mid-se-CQ6f9G.png"
+    },
+    {
+      "name": "Мужские Кроссовки Nike Kyrie 7",
+      "price": "11299",
+      "imgUrl": "https://kartinkin.net/uploads/posts/2022-03/1647914436_1-kartinkin-net-p-kartinki-krossovok-naik-2.jpg"
+    },
+    {
+      "name": "Мужские Кроссовки Jordan Air Jordan 11",
+      "price": "10799",
+      "imgUrl": "https://usmall.ru/image/075/45/94/2fe9852977fc7eeacdb0ce62908e8166.jpeg"
+    },
+    {
+      "name": "Мужские Кроссовки Nike LeBron XVIII",
+      "price": "16499",
+      "imgUrl": "https://content.rozetka.com.ua/goods/images/big/181062266.jpg"
+    },
+    {
+      "name": "Мужские Кроссовки Nike Lebron XVIII Low",
+      "price": "13999",
+      "imgUrl": "https://content2.rozetka.com.ua/goods/images/big/316341853.jpg"
+    },
+    {
+      "name": "Мужские Кроссовки Nike Blazer Mid Suede",
+      "price": "8499",
+      "imgUrl": "https://content2.rozetka.com.ua/goods/images/big/325412403.jpg"
+    },
+    {
+      "name": "Мужские Кроссовки Nike Kyrie Flytrap IV",
+      "price": "11299",
+      "imgUrl": "https://content2.rozetka.com.ua/goods/images/big/310827050.jpg"
+    }
+  ]
+}

@@ -11,7 +11,7 @@ const ProductCard = (props) => {
   }
   return (
     <div className="card mr-30 mb-30">
-      <div class="favorite">
+      <div className="favorite">
         <img src={unliked} alt="unliked" />
       </div>
 
