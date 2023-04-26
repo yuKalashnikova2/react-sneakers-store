@@ -17,9 +17,14 @@ export function App() {
     axios.get('http://localhost:3000/sneakers').then((res) => {
       setListSneakers(res.data)
     })
+
+    axios.get('http://localhost:3000/cart').then((res) => {
+      setCartItems(res.data)
+    })
   }, [])
 
   const onAddToCard = (obj) => {
+    axios.post('http://localhost:3000/cart', obj)
     setCartItems((prev) => [...prev, obj])
   }
 
