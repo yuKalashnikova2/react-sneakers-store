@@ -1,21 +1,13 @@
 import { useEffect, useState } from 'react'
 
 import search from './public/search.svg'
+import clearInput from './public/clearInput.svg'
 import Cart from './components/Cart'
 import ProductCard from './components/ProductCard'
 import Header from './components/Header'
-import sneakers1 from './public/sneakerses/sneakers-1.png'
-import sneakers2 from './public/sneakerses/sneakers-2.png'
-import sneakers3 from './public/sneakerses/sneakers-3.png'
-import sneakers4 from './public/sneakerses/sneakers-4.png'
-import sneakers5 from './public/sneakerses/sneakers-5.png'
-import sneakers6 from './public/sneakerses/sneakers-6.png'
-import sneakers7 from './public/sneakerses/sneakers-7.png'
-import sneakers8 from './public/sneakerses/sneakers-8.png'
-import sneakers9 from './public/sneakerses/sneakers-9.png'
-import sneakers10 from './public/sneakerses/sneakers-10.png'
 
 export function App() {
+  const [serachValue, setSerachValue] = useState('')
   const [listSneakers, setListSneakers] = useState([])
   const [cartItems, setCartItems] = useState([])
   const [cartOpened, setCartOpened] = useState(false)
@@ -33,6 +25,11 @@ export function App() {
   const onAddToCard = (obj) => {
     setCartItems((prev) => [...prev, obj])
   }
+
+  const handleChangeInputValue = (e) => {
+    setSerachValue(e.target.value)
+    console.log(e.target.value)
+  }
   console.log(cartItems)
 
   return (
@@ -44,15 +41,16 @@ export function App() {
       <Header onClickCart={() => setCartOpened(true)} />
       <div className="content p-40">
         <div className="d-flex align-center justify-between mb-40">
-          <h1>Все кроссовки</h1>
+          {serachValue ? <h1>Поиск по: {serachValue}</h1> : <h1>Все кроссовки</h1>}
           <div className="searchBlock d-flex">
             <img width={14} height={14} src={search} alt="search" />
-            <input placeholder="Поиск..." />
+            <input value={serachValue} onChange={handleChangeInputValue} placeholder="Поиск..." />
+            {serachValue && <img onClick={() => setSerachValue('')} width={14} height={14} src={clearInput} className="c-po" />}
           </div>
         </div>
 
         <div className="d-flex wrap">
-          {listSneakers.map((obj) => (
+          {listSneakers.filter((obj) => obj.name.toLowerCase().includes(serachValue)).map((obj) => (
             <ProductCard
               name={obj.name}
               price={obj.price}

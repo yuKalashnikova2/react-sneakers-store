@@ -3,6 +3,7 @@ import CartItem from './CartItem'
 import arrow from '../public/arrow.svg'
 
 const Cart = ({ onClosedCart, items = [] }) => {
+
   return (
     <div className="overlay">
       <div className="drawer d-flex flex-column">
