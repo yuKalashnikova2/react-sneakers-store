@@ -16,8 +16,8 @@ import sneakers9 from './public/sneakerses/sneakers-9.png'
 import sneakers10 from './public/sneakerses/sneakers-10.png'
 
 export function App() {
-  console.log('render')
   const [listSneakers, setListSneakers] = useState([])
+  const [cartItems, setCartItems] = useState([])
   const [cartOpened, setCartOpened] = useState(false)
 
   useEffect(() => {
@@ -30,9 +30,16 @@ export function App() {
       })
   }, [])
 
+  const onAddToCard = (obj) => {
+    setCartItems((prev) => [...prev, obj])
+  }
+  console.log(cartItems)
+
   return (
     <div className="wrapper clear">
-      {cartOpened && <Cart onClocedCart={() => setCartOpened(false)} />}
+      {cartOpened && (
+        <Cart onClosedCart={() => setCartOpened(false)} items={cartItems} />
+      )}
 
       <Header onClickCart={() => setCartOpened(true)} />
       <div className="content p-40">
@@ -46,7 +53,13 @@ export function App() {
 
         <div className="d-flex wrap">
           {listSneakers.map((obj) => (
-            <ProductCard name={obj.name} price={obj.price} img={obj.imgUrl} />
+            <ProductCard
+              name={obj.name}
+              price={obj.price}
+              img={obj.imgUrl}
+              onFavorite={() => console.log('favorite')}
+              onPlus={(obj) => onAddToCard(obj)}
+            />
           ))}
         </div>
       </div>

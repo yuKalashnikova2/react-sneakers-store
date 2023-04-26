@@ -3,10 +3,11 @@ import checked from '../public/cheked.svg'
 import unliked from '../public/heart-unlike.svg'
 import { useState } from 'react'
 
-const ProductCard = (props) => {
+const ProductCard = ({ name, price, img, onPlus, onFavorite }) => {
   const [isAdded, setIsAdded] = useState(false)
 
   const handleClickChecked = () => {
+    onPlus({ name, price, img })
     setIsAdded(!isAdded)
   }
   return (
@@ -15,12 +16,12 @@ const ProductCard = (props) => {
         <img src={unliked} alt="unliked" />
       </div>
 
-      <img width={133} height={112} src={props.img} />
-      <h5>{props.name}</h5>
+      <img width={133} height={112} src={img} />
+      <h5>{name}</h5>
       <div className="d-flex justify-between align-center">
         <div className="d-flex flex-column">
           <span>Цена:</span>
-          <b>{props.price} руб.</b>
+          <b>{price} руб.</b>
         </div>
 
         <img onClick={handleClickChecked} src={isAdded ? checked : plus} />

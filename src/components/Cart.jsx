@@ -2,16 +2,24 @@ import remove from '../public/cartRemove.svg'
 import CartItem from './CartItem'
 import arrow from '../public/arrow.svg'
 
-const Cart = (props) => {
+const Cart = ({ onClosedCart, items = [] }) => {
   return (
     <div className="overlay">
       <div className="drawer d-flex flex-column">
         <h2 className="mb-30 d-flex justify-between">
           Корзина
-          <img className="btnRemove" width={32} height={32} src={remove}  onClick={props.onClocedCart}/>
+          <img
+            className="btnRemove"
+            width={32}
+            height={32}
+            src={remove}
+            onClick={onClosedCart}
+          />
         </h2>
         <div className="items">
-          <CartItem />
+          {items.map((obj) => (
+            <CartItem name={obj.name} price={obj.price} img={obj.img} />
+          ))}
         </div>
 
         <div className="cartTotal">
