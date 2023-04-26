@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import axios from 'axios'
 
 import search from './public/search.svg'
 import clearInput from './public/clearInput.svg'
@@ -13,13 +14,9 @@ export function App() {
   const [cartOpened, setCartOpened] = useState(false)
 
   useEffect(() => {
-    fetch('http://localhost:3000/sneakers')
-      .then((res) => {
-        return res.json()
-      })
-      .then((json) => {
-        setListSneakers(json)
-      })
+    axios.get('http://localhost:3000/sneakers').then((res) => {
+      setListSneakers(res.data)
+    })
   }, [])
 
   const onAddToCard = (obj) => {
@@ -41,24 +38,42 @@ export function App() {
       <Header onClickCart={() => setCartOpened(true)} />
       <div className="content p-40">
         <div className="d-flex align-center justify-between mb-40">
-          {serachValue ? <h1>Поиск по: {serachValue}</h1> : <h1>Все кроссовки</h1>}
+          {serachValue ? (
+            <h1>Поиск по: {serachValue}</h1>
+          ) : (
+            <h1>Все кроссовки</h1>
+          )}
           <div className="searchBlock d-flex">
             <img width={14} height={14} src={search} alt="search" />
-            <input value={serachValue} onChange={handleChangeInputValue} placeholder="Поиск..." />
-            {serachValue && <img onClick={() => setSerachValue('')} width={14} height={14} src={clearInput} className="c-po" />}
+            <input
+              value={serachValue}
+              onChange={handleChangeInputValue}
+              placeholder="Поиск..."
+            />
+            {serachValue && (
+              <img
+                onClick={() => setSerachValue('')}
+                width={14}
+                height={14}
+                src={clearInput}
+                className="c-po"
+              />
+            )}
           </div>
         </div>
 
         <div className="d-flex wrap">
-          {listSneakers.filter((obj) => obj.name.toLowerCase().includes(serachValue)).map((obj) => (
-            <ProductCard
-              name={obj.name}
-              price={obj.price}
-              img={obj.imgUrl}
-              onFavorite={() => console.log('favorite')}
-              onPlus={(obj) => onAddToCard(obj)}
-            />
-          ))}
+          {listSneakers
+            .filter((obj) => obj.name.toLowerCase().includes(serachValue))
+            .map((obj) => (
+              <ProductCard
+                name={obj.name}
+                price={obj.price}
+                img={obj.imgUrl}
+                onFavorite={() => console.log('favorite')}
+                onPlus={(obj) => onAddToCard(obj)}
+              />
+            ))}
         </div>
       </div>
     </div>
