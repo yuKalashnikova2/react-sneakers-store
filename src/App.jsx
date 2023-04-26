@@ -32,12 +32,25 @@ export function App() {
     setSerachValue(e.target.value)
     console.log(e.target.value)
   }
-  console.log(cartItems)
+
+  const onRemoveItem = (id) => {
+    setCartItems((prev) => prev.filter((obj) => obj.id !== id))
+    console.log(id, 'ID')
+  }
+
+  const clearCart = () => {
+    setCartItems([])
+  }
 
   return (
     <div className="wrapper clear">
       {cartOpened && (
-        <Cart onClosedCart={() => setCartOpened(false)} items={cartItems} />
+        <Cart
+          onClosedCart={() => setCartOpened(false)}
+          items={cartItems}
+          onRemove={onRemoveItem}
+          onClearAll={clearCart}
+        />
       )}
 
       <Header onClickCart={() => setCartOpened(true)} />
