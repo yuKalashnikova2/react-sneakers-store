@@ -7,13 +7,14 @@ import Cart from './components/Cart'
 import ProductCard from './components/ProductCard'
 import Header from './components/Header'
 import Home from './pages/Home'
-import { Route, Routes } from 'react-router-dom'
+import Favorites from './pages/Favorites'
+import { Link, Route, Routes } from 'react-router-dom'
 
 export function App() {
   const [serachValue, setSerachValue] = useState('')
   const [listSneakers, setListSneakers] = useState([])
   const [cartItems, setCartItems] = useState([])
-  const [favorits, setFavorites] = useState([])
+  const [favorites, setFavorites] = useState([])
   const [cartOpened, setCartOpened] = useState(false)
 
   useEffect(() => {
@@ -23,6 +24,10 @@ export function App() {
 
     axios.get('http://localhost:3000/cart').then((res) => {
       setCartItems(res.data)
+    })
+
+    axios.get('http://localhost:3000/favorites').then((res) => {
+      setFavorites(res.data)
     })
   }, [])
 
@@ -39,7 +44,6 @@ export function App() {
   const onRemoveItem = (id) => {
     axios.delete(`http://localhost:3000/cart/${id}`)
     setCartItems((prev) => prev.filter((obj) => obj.id !== id))
-    console.log(id, 'ID')
   }
 
   const clearCart = () => {
@@ -47,8 +51,14 @@ export function App() {
   }
 
   const onAddToFavorites = (obj) => {
-    axios.post('http://localhost:3000/favorites', obj)
-    setFavorites((prev) => [...prev, obj])
+    if (favorites.find((objFav) => objFav.id === obj.id)) {
+      axios.delete(`http://localhost:3000/favorites/${obj.id}`)
+      setFavorites((prev) => prev.filter((item) => item.id !== obj.id))
+      console.log(obj, 'ID')
+    } else {
+      axios.post('http://localhost:3000/favorites', obj)
+      setFavorites((prev) => [...prev, obj])
+    }
   }
 
   return (
@@ -62,7 +72,9 @@ export function App() {
         />
       )}
 
-      <Header onClickCart={() => setCartOpened(true)} />
+      <Link to="/">
+        <Header onClickCart={() => setCartOpened(true)} />
+      </Link>
 
       <Routes>
         <Route
@@ -74,6 +86,15 @@ export function App() {
               setSerachValue={setSerachValue}
               onAddToCard={onAddToCard}
               handleChangeInputValue={handleChangeInputValue}
+              onAddToFavorites={onAddToFavorites}
+            />
+          }
+        />
+        <Route
+          path="/favorites"
+          element={
+            <Favorites
+              favorites={favorites}
               onAddToFavorites={onAddToFavorites}
             />
           }

@@ -2,6 +2,7 @@ import cart from '../public/cart.svg'
 import logo from '../public/imageLogo.png'
 import user from '../public/user.svg'
 import favorite from '../public/favorite.svg'
+import { Link } from 'react-router-dom'
 
 const Header = (props) => {
   return (
@@ -18,9 +19,12 @@ const Header = (props) => {
           <img width={18} height={18} src={cart} />
           <span>1025 руб.</span>
         </li>
-        <li className="c-po">
-          <img width={18} height={18} src={favorite} />
-        </li>
+        <Link to="/favorites">
+          <li className="c-po">
+            <img width={18} height={18} src={favorite} />
+          </li>
+        </Link>
+
         <li className="c-po">
           <img width={18} height={18} src={user} />
         </li>

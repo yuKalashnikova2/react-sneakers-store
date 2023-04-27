@@ -4,9 +4,17 @@ import unlike from '../public/heart-unlike.svg'
 import like from '../public/heart-like.svg'
 import { useState } from 'react'
 
-const ProductCard = ({ name, price, img, onPlus, onFavorite }) => {
+const ProductCard = ({
+  id,
+  name,
+  price,
+  img,
+  onPlus,
+  onFavorite,
+  favorited,
+}) => {
   const [isAdded, setIsAdded] = useState(false)
-  const [isFavorite, setIsFavorite] = useState(false)
+  const [isFavorite, setIsFavorite] = useState(favorited)
 
   const handleClickChecked = () => {
     onPlus({ name, price, img })
@@ -14,7 +22,7 @@ const ProductCard = ({ name, price, img, onPlus, onFavorite }) => {
   }
 
   const handleClickFavorite = () => {
-    onFavorite({ name, price, img })
+    onFavorite({ id, name, price, img })
     setIsFavorite(!isFavorite)
   }
   return (

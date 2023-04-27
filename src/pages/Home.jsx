@@ -42,6 +42,7 @@ const Home = ({
           .filter((obj) => obj.name.toLowerCase().includes(serachValue))
           .map((obj) => (
             <ProductCard
+              id={obj.id}
               name={obj.name}
               price={obj.price}
               img={obj.imgUrl}
