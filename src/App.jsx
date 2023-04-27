@@ -11,6 +11,7 @@ export function App() {
   const [serachValue, setSerachValue] = useState('')
   const [listSneakers, setListSneakers] = useState([])
   const [cartItems, setCartItems] = useState([])
+  const [favorits, setFavorites] = useState([])
   const [cartOpened, setCartOpened] = useState(false)
 
   useEffect(() => {
@@ -41,6 +42,11 @@ export function App() {
 
   const clearCart = () => {
     setCartItems([])
+  }
+
+  const onAddToFavorites = (obj) => {
+    axios.post('http://localhost:3000/favorites', obj)
+    setFavorites((prev) => [...prev, obj])
   }
 
   return (
@@ -89,7 +95,7 @@ export function App() {
                 name={obj.name}
                 price={obj.price}
                 img={obj.imgUrl}
-                onFavorite={() => console.log('favorite')}
+                onFavorite={(obj) => onAddToFavorites(obj)}
                 onPlus={(obj) => onAddToCard(obj)}
               />
             ))}
