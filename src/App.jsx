@@ -6,6 +6,8 @@ import clearInput from './public/clearInput.svg'
 import Cart from './components/Cart'
 import ProductCard from './components/ProductCard'
 import Header from './components/Header'
+import Home from './pages/Home'
+import { Route, Routes } from 'react-router-dom'
 
 export function App() {
   const [serachValue, setSerachValue] = useState('')
@@ -61,7 +63,24 @@ export function App() {
       )}
 
       <Header onClickCart={() => setCartOpened(true)} />
-      <div className="content p-40">
+
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <Home
+              listSneakers={listSneakers}
+              serachValue={serachValue}
+              setSerachValue={setSerachValue}
+              onAddToCard={onAddToCard}
+              handleChangeInputValue={handleChangeInputValue}
+              onAddToFavorites={onAddToFavorites}
+            />
+          }
+        />
+      </Routes>
+
+      {/* <div className="content p-40">
         <div className="d-flex align-center justify-between mb-40">
           {serachValue ? (
             <h1>Поиск по: {serachValue}</h1>
@@ -100,7 +119,7 @@ export function App() {
               />
             ))}
         </div>
-      </div>
+      </div> */}
     </div>
   )
 }
