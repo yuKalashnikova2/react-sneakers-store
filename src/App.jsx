@@ -34,6 +34,7 @@ export function App() {
   }
 
   const onRemoveItem = (id) => {
+    axios.delete(`http://localhost:3000/cart/${id}`)
     setCartItems((prev) => prev.filter((obj) => obj.id !== id))
     console.log(id, 'ID')
   }

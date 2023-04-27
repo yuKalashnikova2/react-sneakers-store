@@ -26,7 +26,7 @@ const Cart = ({ onClosedCart, items = [], onRemove, onClearAll }) => {
             <p className="paragraph">
               Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ.
             </p>
-            <button className="greenButton">Вернуться назад</button>
+            <button className="greenButton" onClick={onClosedCart} >Вернуться назад</button>
           </div>
         ) : (
             <>
