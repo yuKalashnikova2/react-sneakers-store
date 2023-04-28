@@ -12,8 +12,9 @@ const ProductCard = ({
   onPlus,
   onFavorite,
   favorited,
+  added =false
 }) => {
-  const [isAdded, setIsAdded] = useState(false)
+  const [isAdded, setIsAdded] = useState(added)
   const [isFavorite, setIsFavorite] = useState(favorited)
 
   const handleClickChecked = () => {
@@ -39,7 +40,7 @@ const ProductCard = ({
           <b>{price} руб.</b>
         </div>
 
-        <img onClick={handleClickChecked} src={isAdded ? checked : plus} />
+        <img onClick={handleClickChecked} src={isAdded ? checked : plus}  />
       </div>
     </div>
   )

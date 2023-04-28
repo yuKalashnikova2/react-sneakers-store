@@ -3,6 +3,7 @@ import clearInput from '../public/clearInput.svg'
 import ProductCard from '../components/ProductCard'
 
 const Home = ({
+  cartItems,
   listSneakers,
   serachValue,
   setSerachValue,
@@ -39,15 +40,19 @@ const Home = ({
 
       <div className="d-flex wrap">
         {listSneakers
-          .filter((obj) => obj.name.toLowerCase().includes(serachValue))
-          .map((obj) => (
+          .filter((obj) => obj.name.toLowerCase().includes(serachValue.toLowerCase()))
+          .map((obj, index) => (
             <ProductCard
+            key={index}
+ 
+        
               id={obj.id}
               name={obj.name}
               price={obj.price}
               img={obj.imgUrl}
               onFavorite={(obj) => onAddToFavorites(obj)}
               onPlus={(obj) => onAddToCard(obj)}
+              added={cartItems.some(item => Number(obj.id) === Number(item.id))}
             />
           ))}
       </div>

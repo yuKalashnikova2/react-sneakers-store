@@ -93,6 +93,7 @@ export function App() {
               onAddToCard={onAddToCard}
               handleChangeInputValue={handleChangeInputValue}
               onAddToFavorites={onAddToFavorites}
+              cartItems={cartItems}
             />
           }
         />
