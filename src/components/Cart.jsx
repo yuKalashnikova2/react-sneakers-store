@@ -33,6 +33,7 @@ const Cart = ({ onClosedCart, items = [], onRemove, onClearAll }) => {
              <div className="items">
             {items.map((obj, index) => (
               <CartItem
+                key={index}
                 id={obj.id}
                 name={obj.name}
                 price={obj.price}

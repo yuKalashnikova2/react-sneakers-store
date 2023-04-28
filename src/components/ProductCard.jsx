@@ -17,7 +17,7 @@ const ProductCard = ({
   const [isFavorite, setIsFavorite] = useState(favorited)
 
   const handleClickChecked = () => {
-    onPlus({ name, price, img })
+    onPlus({ id, name, price, img })
     setIsAdded(!isAdded)
   }
 

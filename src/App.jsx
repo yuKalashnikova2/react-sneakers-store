@@ -32,8 +32,14 @@ export function App() {
   }, [])
 
   const onAddToCard = (obj) => {
-    axios.post('http://localhost:3000/cart', obj)
+    if (cartItems.find((item) => Number(item.id) === Number(obj.id))) {
+      axios.delete(`http://localhost:3000/cart/${obj.id}`)
+      setCartItems((prev) => prev.filter((item) => Number(item.id) !== Number(obj.id)))
+    } else {
+        axios.post('http://localhost:3000/cart', obj)
     setCartItems((prev) => [...prev, obj])
+    }
+  
   }
 
   const handleChangeInputValue = (e) => {
