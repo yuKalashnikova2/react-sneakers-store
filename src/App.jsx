@@ -18,28 +18,31 @@ export function App() {
   const [cartOpened, setCartOpened] = useState(false)
 
   useEffect(() => {
-    axios.get('http://localhost:3000/sneakers').then((res) => {
-      setListSneakers(res.data)
-    })
+    const fetchData = async () => {
+      const responsSneakers = await axios.get('http://localhost:3000/sneakers')
+      const responsCart = await axios.get('http://localhost:3000/cart')
+      const responsFavorites = await axios.get(
+        'http://localhost:3000/favorites'
+      )
 
-    axios.get('http://localhost:3000/cart').then((res) => {
-      setCartItems(res.data)
-    })
+      setCartItems(responsCart.data)
+      setFavorites(responsFavorites.data)
+      setListSneakers(responsSneakers.data)
+    }
 
-    axios.get('http://localhost:3000/favorites').then((res) => {
-      setFavorites(res.data)
-    })
+    fetchData()
   }, [])
 
   const onAddToCard = (obj) => {
     if (cartItems.find((item) => Number(item.id) === Number(obj.id))) {
       axios.delete(`http://localhost:3000/cart/${obj.id}`)
-      setCartItems((prev) => prev.filter((item) => Number(item.id) !== Number(obj.id)))
+      setCartItems((prev) =>
+        prev.filter((item) => Number(item.id) !== Number(obj.id))
+      )
     } else {
-        axios.post('http://localhost:3000/cart', obj)
-    setCartItems((prev) => [...prev, obj])
+      axios.post('http://localhost:3000/cart', obj)
+      setCartItems((prev) => [...prev, obj])
     }
-  
   }
 
   const handleChangeInputValue = (e) => {
