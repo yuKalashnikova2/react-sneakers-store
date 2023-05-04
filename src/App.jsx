@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import axios from 'axios'
 
 import search from './public/search.svg'
@@ -67,15 +67,26 @@ export function App() {
     if (favorites.find((objFav) => objFav.id === obj.id)) {
       axios.delete(`http://localhost:3000/favorites/${obj.id}`)
       setFavorites((prev) => prev.filter((item) => item.id !== obj.id))
-      console.log(obj, 'ID')
     } else {
       axios.post('http://localhost:3000/favorites', obj)
       setFavorites((prev) => [...prev, obj])
     }
   }
 
+  const isItemAdded = (id) => {
+    return cartItems.some((obj) => Number(obj.id) === Number(id))
+  }
+
   return (
-    <AppContext.Provider value={{ listSneakers, cartItems, favorites }}>
+    <AppContext.Provider
+      value={{
+        listSneakers,
+        cartItems,
+        favorites,
+        isItemAdded,
+        onAddToFavorites,
+      }}
+    >
       <div className="wrapper clear">
         {cartOpened && (
           <Cart
@@ -106,10 +117,7 @@ export function App() {
               />
             }
           />
-          <Route
-            path="/favorites"
-            element={<Favorites onAddToFavorites={onAddToFavorites} />}
-          />
+          <Route path="/favorites" element={<Favorites />} />
         </Routes>
       </div>
     </AppContext.Provider>

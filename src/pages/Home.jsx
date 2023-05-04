@@ -1,9 +1,10 @@
 import search from '../public/search.svg'
 import clearInput from '../public/clearInput.svg'
 import ProductCard from '../components/ProductCard'
+import { useContext } from 'react'
+import { AppContext } from '../context'
 
 const Home = ({
-  cartItems,
   listSneakers,
   serachValue,
   setSerachValue,
@@ -12,19 +13,21 @@ const Home = ({
   onAddToFavorites,
   isLoading,
 }) => {
+  const { isItemAdded } = useContext(AppContext)
+
   const renderItems = () => {
-    const filtredListSneakers = listSneakers.filter((obj) =>
-      obj.name.toLowerCase().includes(serachValue.toLowerCase())
+    const filtredListSneakers = listSneakers.filter((item) =>
+      item.name.toLowerCase().includes(serachValue.toLowerCase())
     )
     return (isLoading ? [...Array(10)] : filtredListSneakers).map(
-      (obj, index) => (
+      (item, index) => (
         <ProductCard
           key={index}
           onFavorite={(obj) => onAddToFavorites(obj)}
           onPlus={(obj) => onAddToCard(obj)}
-          added={cartItems.some((item) => Number(obj.id) === Number(item.id))}
+          added={isItemAdded(item && item.id)}
           loading={isLoading}
-          {...obj}
+          {...item}
         />
       )
     )

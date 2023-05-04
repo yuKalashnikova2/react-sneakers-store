@@ -2,8 +2,9 @@ import plus from '../public/plus.svg'
 import checked from '../public/cheked.svg'
 import unlike from '../public/heart-unlike.svg'
 import like from '../public/heart-like.svg'
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import ContentLoader from 'react-content-loader'
+import { AppContext } from '../context'
 
 const ProductCard = ({
   id,
@@ -12,16 +13,16 @@ const ProductCard = ({
   img,
   onPlus,
   onFavorite,
-  favorited,
-  added = false,
-  loading,
+  favorited = false,
+  loading = false,
 }) => {
-  const [isAdded, setIsAdded] = useState(added)
+  const { isItemAdded } = useContext(AppContext)
+  console.log(isItemAdded(id), id)
+
   const [isFavorite, setIsFavorite] = useState(favorited)
 
   const handleClickChecked = () => {
     onPlus({ id, name, price, img })
-    setIsAdded(!isAdded)
   }
 
   const handleClickFavorite = () => {
@@ -59,7 +60,10 @@ const ProductCard = ({
               <b>{price} руб.</b>
             </div>
 
-            <img onClick={handleClickChecked} src={isAdded ? checked : plus} />
+            <img
+              onClick={handleClickChecked}
+              src={isItemAdded(id) ? checked : plus}
+            />
           </div>
         </>
       )}
