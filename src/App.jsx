@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { createContext, useEffect, useState } from 'react'
 import axios from 'axios'
 
 import search from './public/search.svg'
@@ -9,6 +9,7 @@ import Header from './components/Header'
 import Home from './pages/Home'
 import Favorites from './pages/Favorites'
 import { Link, Route, Routes } from 'react-router-dom'
+import { AppContext } from './context'
 
 export function App() {
   const [serachValue, setSerachValue] = useState('')
@@ -74,46 +75,43 @@ export function App() {
   }
 
   return (
-    <div className="wrapper clear">
-      {cartOpened && (
-        <Cart
-          onClosedCart={() => setCartOpened(false)}
-          items={cartItems}
-          onRemove={onRemoveItem}
-          onClearAll={clearCart}
-        />
-      )}
+    <AppContext.Provider value={{ listSneakers, cartItems, favorites }}>
+      <div className="wrapper clear">
+        {cartOpened && (
+          <Cart
+            onClosedCart={() => setCartOpened(false)}
+            items={cartItems}
+            onRemove={onRemoveItem}
+            onClearAll={clearCart}
+          />
+        )}
 
-      <Link to="/">
-        <Header onClickCart={() => setCartOpened(true)} />
-      </Link>
+        <Link to="/">
+          <Header onClickCart={() => setCartOpened(true)} />
+        </Link>
 
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <Home
-              listSneakers={listSneakers}
-              serachValue={serachValue}
-              setSerachValue={setSerachValue}
-              onAddToCard={onAddToCard}
-              handleChangeInputValue={handleChangeInputValue}
-              onAddToFavorites={onAddToFavorites}
-              cartItems={cartItems}
-              isLoading={isLoading}
-            />
-          }
-        />
-        <Route
-          path="/favorites"
-          element={
-            <Favorites
-              favorites={favorites}
-              onAddToFavorites={onAddToFavorites}
-            />
-          }
-        />
-      </Routes>
-    </div>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <Home
+                listSneakers={listSneakers}
+                serachValue={serachValue}
+                setSerachValue={setSerachValue}
+                onAddToCard={onAddToCard}
+                handleChangeInputValue={handleChangeInputValue}
+                onAddToFavorites={onAddToFavorites}
+                cartItems={cartItems}
+                isLoading={isLoading}
+              />
+            }
+          />
+          <Route
+            path="/favorites"
+            element={<Favorites onAddToFavorites={onAddToFavorites} />}
+          />
+        </Routes>
+      </div>
+    </AppContext.Provider>
   )
 }
