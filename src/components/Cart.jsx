@@ -2,6 +2,7 @@ import remove from '../public/cartRemove.svg'
 import cartEmpty from '../public/cartEmpty.svg'
 import CartItem from './CartItem'
 import arrow from '../public/arrow.svg'
+import Info from './Info'
 
 const Cart = ({ onClosedCart, items = [], onRemove, onClearAll }) => {
   return (
@@ -9,7 +10,9 @@ const Cart = ({ onClosedCart, items = [], onRemove, onClearAll }) => {
       <div className="drawer d-flex flex-column">
         <h2 className="mb-30 d-flex justify-between">
           Корзина
-          <button onClick={onClearAll} className='delete'>Удалить все</button>
+          <button onClick={onClearAll} className="delete">
+            Удалить все
+          </button>
           <img
             className="btnRemove"
             width={32}
@@ -19,53 +22,47 @@ const Cart = ({ onClosedCart, items = [], onRemove, onClearAll }) => {
           />
         </h2>
 
-        {items.length === 0 ? (
-          <div className="text-center mb-300 mt-150">
-            <img width={120} height={120} src={cartEmpty} />
-            <h3>Корзина пустая</h3>
-            <p className="paragraph">
-              Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ.
-            </p>
-            <button className="greenButton" onClick={onClosedCart} >Вернуться назад</button>
-          </div>
+        {items.length ? (
+          <>
+            <div className="items">
+              {items.map((obj, index) => (
+                <CartItem
+                  key={index}
+                  id={obj.id}
+                  name={obj.name}
+                  price={obj.price}
+                  img={obj.img}
+                  onRemove={onRemove}
+                />
+              ))}
+            </div>
+
+            <div className="cartTotal">
+              <ul>
+                <li className="d-flex">
+                  <span>Итого:</span>
+                  <div></div>
+                  <b>21 498 руб. </b>
+                </li>
+                <li className="d-flex">
+                  <span>Налог 5%: </span>
+                  <div></div>
+                  <b>1074 руб.</b>
+                </li>
+              </ul>
+              <button className="greenButton">
+                Оформить заказ
+                <img src={arrow} alt="arrow" />
+              </button>
+            </div>
+          </>
         ) : (
-            <>
-             <div className="items">
-            {items.map((obj, index) => (
-              <CartItem
-                key={index}
-                id={obj.id}
-                name={obj.name}
-                price={obj.price}
-                img={obj.img}
-                onRemove={onRemove}
-              />
-            ))}
-          </div>
-
-          <div className="cartTotal">
-          <ul>
-            <li className="d-flex">
-              <span>Итого:</span>
-              <div></div>
-              <b>21 498 руб. </b>
-            </li>
-            <li className="d-flex">
-              <span>Налог 5%: </span>
-              <div></div>
-              <b>1074 руб.</b>
-            </li>
-          </ul>
-          <button className="greenButton">
-            Оформить заказ
-            <img src={arrow} alt="arrow" />
-          </button>
-        </div>
-            </>
-         
+          <Info
+            title="Корзина пустая"
+            description="Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ"
+            image={cartEmpty}
+          />
         )}
-
-      
       </div>
     </div>
   )

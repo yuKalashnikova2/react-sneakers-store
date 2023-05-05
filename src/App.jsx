@@ -85,6 +85,7 @@ export function App() {
         favorites,
         isItemAdded,
         onAddToFavorites,
+        setCartOpened,
       }}
     >
       <div className="wrapper clear">
