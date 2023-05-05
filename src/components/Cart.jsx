@@ -1,10 +1,28 @@
+import axios from 'axios'
 import remove from '../public/cartRemove.svg'
 import cartEmpty from '../public/cartEmpty.svg'
+import orderComplete from '../public/orderComplete.svg'
 import CartItem from './CartItem'
 import arrow from '../public/arrow.svg'
 import Info from './Info'
+import { useContext, useState } from 'react'
+import { AppContext } from '../context'
 
 const Cart = ({ onClosedCart, items = [], onRemove, onClearAll }) => {
+  const { cartItems, setCartItems } = useContext(AppContext)
+  const [orderIsProcessed, setOrderIsProcessed] = useState(false)
+
+  const onClickOrder = () => {
+    axios.post('http://localhost:3000/orders', cartItems)
+    setOrderIsProcessed(true)
+
+    for (let i = 0; i < cartItems.length; i++) {
+      axios.delete('http://localhost:3000/cart/' + cartItems[i].id)
+    }
+
+    setCartItems([])
+  }
+
   return (
     <div className="overlay">
       <div className="drawer d-flex flex-column">
@@ -50,7 +68,7 @@ const Cart = ({ onClosedCart, items = [], onRemove, onClearAll }) => {
                   <b>1074 руб.</b>
                 </li>
               </ul>
-              <button className="greenButton">
+              <button onClick={onClickOrder} className="greenButton">
                 Оформить заказ
                 <img src={arrow} alt="arrow" />
               </button>
@@ -58,9 +76,13 @@ const Cart = ({ onClosedCart, items = [], onRemove, onClearAll }) => {
           </>
         ) : (
           <Info
-            title="Корзина пустая"
-            description="Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ"
-            image={cartEmpty}
+            title={orderIsProcessed ? ' Заказ оформлен!' : 'Корзина пустая'}
+            description={
+              orderIsProcessed
+                ? 'Ваш заказ скоро будет передан курьерской доставке'
+                : 'Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ'
+            }
+            image={orderIsProcessed ? orderComplete : cartEmpty}
           />
         )}
       </div>

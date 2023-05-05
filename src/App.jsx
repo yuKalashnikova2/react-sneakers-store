@@ -86,6 +86,7 @@ export function App() {
         isItemAdded,
         onAddToFavorites,
         setCartOpened,
+        setCartItems,
       }}
     >
       <div className="wrapper clear">
