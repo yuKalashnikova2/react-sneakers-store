@@ -8,7 +8,6 @@ import { useCart } from '../hooks/useCart'
 const Header = (props) => {
   const { totalPrice } = useCart()
 
-  console.log(totalPrice, 'vot TYT')
   return (
     <header className="d-flex justify-between p-40 ">
       <div className="headerLeft d-flex align-center">
@@ -29,9 +28,11 @@ const Header = (props) => {
           </li>
         </Link>
 
-        <li className="c-po">
-          <img width={18} height={18} src={user} />
-        </li>
+        <Link to="/orders">
+          <li className="c-po">
+            <img width={18} height={18} src={user} />
+          </li>
+        </Link>
       </ul>
     </header>
   )

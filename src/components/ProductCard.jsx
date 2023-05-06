@@ -48,9 +48,9 @@ const ProductCard = ({
         </ContentLoader>
       ) : (
         <>
-          <div className="favorite" onClick={handleClickFavorite}>
+          {onFavorite && <div className="favorite" onClick={handleClickFavorite}>
             <img src={isFavorite ? like : unlike} alt="unliked" />
-          </div>
+          </div>}
 
           <img width={133} height={112} src={img} />
           <h5>{name}</h5>
@@ -60,10 +60,10 @@ const ProductCard = ({
               <b>{price} руб.</b>
             </div>
 
-            <img
+           {onPlus && <img
               onClick={handleClickChecked}
               src={isItemAdded(id) ? checked : plus}
-            />
+            />}
           </div>
         </>
       )}

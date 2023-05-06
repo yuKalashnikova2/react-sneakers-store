@@ -1,15 +1,15 @@
 import { useEffect, useState } from 'react'
+import { Link, Route, Routes } from 'react-router-dom'
+import { AppContext } from './context'
 import axios from 'axios'
 
-import search from './public/search.svg'
-import clearInput from './public/clearInput.svg'
 import Cart from './components/Cart'
-import ProductCard from './components/ProductCard'
+import Orders from './pages/Orders'
 import Header from './components/Header'
 import Home from './pages/Home'
 import Favorites from './pages/Favorites'
-import { Link, Route, Routes } from 'react-router-dom'
-import { AppContext } from './context'
+
+
 
 export function App() {
   const [serachValue, setSerachValue] = useState('')
@@ -85,6 +85,7 @@ export function App() {
         favorites,
         isItemAdded,
         onAddToFavorites,
+        onAddToCard,
         setCartOpened,
         setCartItems,
       }}
@@ -120,6 +121,7 @@ export function App() {
             }
           />
           <Route path="/favorites" element={<Favorites />} />
+          <Route path="/orders" element={<Orders />} />
         </Routes>
       </div>
     </AppContext.Provider>
