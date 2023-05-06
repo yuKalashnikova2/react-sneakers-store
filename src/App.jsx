@@ -9,8 +9,6 @@ import Header from './components/Header'
 import Home from './pages/Home'
 import Favorites from './pages/Favorites'
 
-
-
 export function App() {
   const [serachValue, setSerachValue] = useState('')
   const [listSneakers, setListSneakers] = useState([])
@@ -21,17 +19,24 @@ export function App() {
 
   useEffect(() => {
     const fetchData = async () => {
-      setIsLoading(true)
-      const responsSneakers = await axios.get('http://localhost:3000/sneakers')
-      const responsCart = await axios.get('http://localhost:3000/cart')
-      const responsFavorites = await axios.get(
-        'http://localhost:3000/favorites'
-      )
-      setIsLoading(false)
+      try {
+        setIsLoading(true)
+        const [responsSneakers, responsCart, responsFavorites] =
+          await Promise.all([
+            axios.get('http://localhost:3000/sneakers'),
+            axios.get('http://localhost:3000/cart'),
+            axios.get('http://localhost:3000/favorites'),
+          ])
 
-      setCartItems(responsCart.data)
-      setFavorites(responsFavorites.data)
-      setListSneakers(responsSneakers.data)
+        setIsLoading(false)
+
+        setCartItems(responsCart.data)
+        setFavorites(responsFavorites.data)
+        setListSneakers(responsSneakers.data)
+      } catch (error) {
+        alert('Ошибка загрузки данных. Повторите попытку')
+        console.error(error)
+      }
     }
 
     fetchData()
