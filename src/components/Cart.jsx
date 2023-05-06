@@ -5,11 +5,11 @@ import orderComplete from '../public/orderComplete.svg'
 import CartItem from './CartItem'
 import arrow from '../public/arrow.svg'
 import Info from './Info'
-import { useContext, useState } from 'react'
-import { AppContext } from '../context'
+import { useState } from 'react'
+import { useCart } from '../hooks/useCart'
 
 const Cart = ({ onClosedCart, items = [], onRemove, onClearAll }) => {
-  const { cartItems, setCartItems } = useContext(AppContext)
+  const { cartItems, setCartItems, totalPrice } = useCart()
   const [orderIsProcessed, setOrderIsProcessed] = useState(false)
 
   const onClickOrder = () => {
@@ -60,12 +60,12 @@ const Cart = ({ onClosedCart, items = [], onRemove, onClearAll }) => {
                 <li className="d-flex">
                   <span>Итого:</span>
                   <div></div>
-                  <b>21 498 руб. </b>
+                  <b>{totalPrice} руб. </b>
                 </li>
                 <li className="d-flex">
                   <span>Налог 5%: </span>
                   <div></div>
-                  <b>1074 руб.</b>
+                  <b>{Math.round((totalPrice / 100) * 5)} руб.</b>
                 </li>
               </ul>
               <button onClick={onClickOrder} className="greenButton">
